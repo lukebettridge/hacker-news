@@ -4,12 +4,14 @@ import Item from '../../../library/types/Item'
 const PAGE_SIZE = 20
 
 export const useHomeLogic = () => {
+    const [loading, setLoading] = useState(false)
     const [page, setPage] = useState<number>(1)
     const [stories, setStories] = useState<Item[]>([])
     const [storyIds, setStoryIds] = useState<number[]>([])
 
     // Fetch initial story IDs
     useEffect(() => {
+        setLoading(true)
         const fetchStoryIds = async () => {
             const res = await fetch(
                 'https://hacker-news.firebaseio.com/v0/topstories.json',
@@ -19,7 +21,9 @@ export const useHomeLogic = () => {
         }
 
         const intervalId = setInterval(() => {
-            fetchStoryIds()
+            if (!loading) {
+                fetchStoryIds()
+            }
         }, 30000)
 
         fetchStoryIds()
@@ -31,9 +35,11 @@ export const useHomeLogic = () => {
     useEffect(() => {
         const fetchStories = async () => {
             if (storyIds.length > 0) {
+                setLoading(true)
+
                 const stories = []
                 const offset = (page - 1) * PAGE_SIZE
-                for (const i in storyIds.slice(offset, offset + PAGE_SIZE)) {
+                for (const i in storyIds.slice(0, offset + PAGE_SIZE)) {
                     const res = await fetch(
                         `https://hacker-news.firebaseio.com/v0/item/${storyIds[i]}.json`,
                     )
@@ -44,12 +50,20 @@ export const useHomeLogic = () => {
                     })
                 }
                 setStories(stories)
+                setLoading(false)
             }
         }
         fetchStories()
     }, [page, storyIds])
 
+    const loadMore = () => {
+        setPage(page + 1)
+    }
+
     return {
+        canLoadMore: stories.length > 0 && storyIds.length > stories.length,
+        loading,
+        loadMore,
         page,
         stories,
     }

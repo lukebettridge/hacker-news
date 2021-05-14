@@ -86,9 +86,9 @@ export const Signpost = styled.p`
     display: flex;
     font-size: 9pt;
     font-weight: 500;
-    grid-gap: ${rem('10px')};
+    grid-gap: ${rem('8px')};
     letter-spacing: ${rem('0.75px')};
-    margin: 0 0 ${rem('7px')};
+    margin: 0 0 ${rem('6px')};
     text-transform: uppercase;
 `
 
@@ -98,6 +98,7 @@ export const Wrapper = styled.div`
     box-shadow: 0 ${rem('1px')} ${rem('2px')}
         ${({ theme }) => theme.colors.shadow};
     margin-bottom: ${rem('10px')};
+    min-height: ${rem('218.66px')};
     padding: ${rem('40px')} 0;
     position: relative;
     z-index: 1;

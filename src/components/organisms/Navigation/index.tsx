@@ -8,7 +8,7 @@ const Navigation: React.FC = () => {
     const [detached, setDetached] = useState(false)
     useEffect(() => {
         window.addEventListener('scroll', () => {
-            setDetached(window.pageYOffset > 200)
+            setDetached(window.pageYOffset > 228)
         })
     }, [])
 
@@ -31,6 +31,11 @@ const Navigation: React.FC = () => {
                         </Heading>
                     )}
                     <Heading level={detached ? 5 : 3} style={{ margin: 0 }}>
+                        {detached && (
+                            <S.Signpost>
+                                Live <Dot />
+                            </S.Signpost>
+                        )}
                         Top Stories
                     </Heading>
                 </div>

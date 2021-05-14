@@ -1,16 +1,20 @@
 import StoryList from '../../organisms/StoryList'
-import PageContainer from '../../atoms/PageContainer'
 import { useHomeLogic } from './logic'
 import * as S from './styles'
 
 const Home: React.FC = () => {
-    const { page, stories } = useHomeLogic()
+    const { canLoadMore, loading, loadMore, stories } = useHomeLogic()
 
     return (
         <S.Wrapper>
-            <PageContainer>
+            <S.Container>
                 <StoryList stories={stories} />
-            </PageContainer>
+                {canLoadMore && (
+                    <S.Button disabled={loading} onClick={loadMore}>
+                        Load more
+                    </S.Button>
+                )}
+            </S.Container>
         </S.Wrapper>
     )
 }

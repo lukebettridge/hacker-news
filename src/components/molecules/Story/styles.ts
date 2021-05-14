@@ -33,6 +33,9 @@ export const Hostname = styled.p`
     color: ${({ theme }) => theme.colors.text.secondary};
     font-size: 10pt;
     margin: ${rem('10px')} 0;
+    max-width: ${rem('170px')};
+    overflow: hidden;
+    text-overflow: ellipsis;
 `
 
 export const Meta = styled.div`
