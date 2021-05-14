@@ -35,6 +35,7 @@ const Navigation: React.FC = () => {
                         </>
                     )}
                 </div>
+                <S.More />
             </S.Container>
         </S.Wrapper>
     )

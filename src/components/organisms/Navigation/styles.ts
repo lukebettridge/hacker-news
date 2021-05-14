@@ -1,9 +1,12 @@
 import styled, { css } from 'styled-components'
-import { rem } from 'polished'
+import { linearGradient, rem, rgba } from 'polished'
 import { FaHackerNewsSquare } from 'react-icons/fa'
+import { HiDotsVertical } from 'react-icons/hi'
 import PageContainer from '../../atoms/PageContainer'
 
 export const Container = styled(PageContainer)<{ detached: boolean }>`
+    display: flex;
+    justify-content: space-between;
     left: 0;
     right: 0;
     top: ${rem('-220px')};
@@ -12,6 +15,7 @@ export const Container = styled(PageContainer)<{ detached: boolean }>`
     ${({ detached }) =>
         detached &&
         css`
+        align-items: center;
             background-color: ${({ theme }) =>
                 theme.colors.background.secondary};
             border: ${rem('1px')} solid ${({ theme }) => theme.colors.border};
@@ -22,6 +26,35 @@ export const Container = styled(PageContainer)<{ detached: boolean }>`
             position: fixed;
             top: ${rem('40px')};
             transition: top 500ms;
+            width: calc(100% - ${rem('26px')});
+
+            &::before {
+                background-color: ${({ theme }) =>
+                    theme.colors.background.primary};
+                content: '';
+                height: ${rem('40px')};
+                left: 0;
+                position: absolute;
+                top: ${rem('-41px')};
+                width: 100%;
+            }
+
+            &::after {
+                background: ${({ theme }) =>
+                    linearGradient({
+                        colorStops: [
+                            `${theme.colors.background.primary} 0%`,
+                            `${rgba(theme.colors.background.primary, 0)} 100%`,
+                        ],
+                        toDirection: 'to bottom',
+                    })}
+                bottom: ${rem('-101px')};
+                content: '';
+                height: ${rem('100px')};
+                left: 0;
+                position: absolute;
+                width: 100%;
+            }
         `}
 `
 
@@ -30,11 +63,17 @@ export const Logo = styled(FaHackerNewsSquare)`
     font-size: 26pt;
 `
 
+export const More = styled(HiDotsVertical)`
+    color: ${({ theme }) => theme.colors.text.secondary};
+    font-size: 16pt;
+`
+
 export const Wrapper = styled.div`
     background-color: ${({ theme }) => theme.colors.background.primary};
     border-bottom: ${rem('1px')} solid ${({ theme }) => theme.colors.border};
     box-shadow: 0 ${rem('1px')} ${rem('2px')}
         ${({ theme }) => theme.colors.shadow};
+    margin-bottom: ${rem('10px')};
     padding: ${rem('40px')} 0;
     position: relative;
 `
