@@ -1,14 +1,17 @@
 import * as S from './styles'
 
 export type HeadingProps = {
-    level: S.Level
+    level?: S.Level
+    style?: React.CSSProperties
+    type?: S.Type
 }
 
-const Heading: React.FC<HeadingProps> = ({ level, ...rest }) => {
+const Heading: React.FC<HeadingProps> = ({ level, type, ...rest }) => {
     return (
         <S.Heading
             as={`h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'}
-            level={level}
+            level={level ?? 1}
+            type={type ?? 'primary'}
             {...rest}
         />
     )
@@ -16,6 +19,7 @@ const Heading: React.FC<HeadingProps> = ({ level, ...rest }) => {
 
 Heading.defaultProps = {
     level: 1,
+    type: 'primary',
 }
 
 export default Heading
