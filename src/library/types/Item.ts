@@ -3,6 +3,7 @@ type Item = {
     descendants: number
     id: number
     kids?: number[]
+    rank?: number
     score: number
     text?: string
     time: number

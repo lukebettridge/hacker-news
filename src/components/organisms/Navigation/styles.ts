@@ -55,7 +55,19 @@ export const Container = styled(PageContainer)<{ detached: boolean }>`
                 position: absolute;
                 width: 100%;
             }
+
+            > div {
+                align-items: center;
+                display: flex;
+                grid-gap: ${rem('22px')};
+            }
         `}
+`
+
+export const Controls = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `
 
 export const Logo = styled(FaHackerNewsSquare)`
@@ -64,8 +76,20 @@ export const Logo = styled(FaHackerNewsSquare)`
 `
 
 export const More = styled(HiDotsVertical)`
+    align-self: flex-end;
     color: ${({ theme }) => theme.colors.text.secondary};
     font-size: 16pt;
+`
+
+export const Signpost = styled.p`
+    align-items: center;
+    display: flex;
+    font-size: 9pt;
+    font-weight: 500;
+    grid-gap: ${rem('10px')};
+    letter-spacing: ${rem('0.75px')};
+    margin: 0 0 ${rem('7px')};
+    text-transform: uppercase;
 `
 
 export const Wrapper = styled.div`
@@ -76,4 +100,5 @@ export const Wrapper = styled.div`
     margin-bottom: ${rem('10px')};
     padding: ${rem('40px')} 0;
     position: relative;
+    z-index: 1;
 `

@@ -1,6 +1,20 @@
 import styled from 'styled-components'
 import { rem } from 'polished'
 
+export const Author = styled.p`
+    font-size: 10pt;
+    line-height: 1.5;
+    text-align: right;
+
+    a {
+        color: ${({ theme }) => theme.colors.secondary};
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+`
+
 export const Comments = styled.div`
     align-items: center;
     color: ${({ theme }) => theme.colors.secondary};
@@ -11,11 +25,8 @@ export const Comments = styled.div`
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     padding: ${rem('25px')} 0;
-
-    &:not(:last-child) {
-        border-bottom: ${rem('1px')} solid ${({ theme }) => theme.colors.border};
-    }
 `
 
 export const Hostname = styled.p`
@@ -27,6 +38,22 @@ export const Hostname = styled.p`
 export const Meta = styled.div`
     display: flex;
     justify-content: space-between;
+`
+
+export const Rank = styled.p`
+    align-items: center;
+    align-self: center;
+    background-color: ${({ theme }) => theme.colors.background.secondary};
+    border-radius: 50%;
+    box-shadow: 0 ${rem('7px')} ${rem('20px')} ${rem('-10px')}
+        ${({ theme }) => theme.colors.shadow};
+    display: flex;
+    flex-shrink: 0;
+    font-weight: 600;
+    height: ${rem('45px')};
+    justify-content: center;
+    transition: background-color 250ms ease-in;
+    width: ${rem('45px')};
 `
 
 export const Score = styled.div`
@@ -48,7 +75,19 @@ export const Stats = styled.div`
     }
 `
 
-export const Time = styled.p`
-    font-size: 10pt;
-    text-align: right;
+export const Wrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    grid-gap: ${rem('18px')};
+
+    &:not(:last-child) {
+        border-bottom: ${rem('1px')} solid ${({ theme }) => theme.colors.border};
+    }
+
+    &:hover {
+        ${Rank} {
+            background-color: ${({ theme }) => theme.colors.primary};
+            color: #ffffff;
+        }
+    }
 `

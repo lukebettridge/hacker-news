@@ -17,7 +17,14 @@ export const useHomeLogic = () => {
             const storyIds = await res.json()
             setStoryIds(storyIds)
         }
+
+        const intervalId = setInterval(() => {
+            fetchStoryIds()
+        }, 30000)
+
         fetchStoryIds()
+
+        return () => clearInterval(intervalId)
     }, [])
 
     // Fetch each story for the set page
@@ -31,7 +38,10 @@ export const useHomeLogic = () => {
                         `https://hacker-news.firebaseio.com/v0/item/${storyIds[i]}.json`,
                     )
                     const story = await res.json()
-                    stories.push(story)
+                    stories.push({
+                        ...story,
+                        rank: storyIds.indexOf(storyIds[i]) + 1,
+                    })
                 }
                 setStories(stories)
             }
