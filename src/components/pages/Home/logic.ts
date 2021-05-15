@@ -29,6 +29,7 @@ export const useHomeLogic = () => {
         fetchStoryIds()
 
         return () => clearInterval(intervalId)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     // Fetch each story for the set page

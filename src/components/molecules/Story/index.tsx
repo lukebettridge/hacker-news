@@ -12,7 +12,10 @@ import Item from '../../../library/types/Item'
 import { useStoryLogic } from './logic'
 import * as S from './styles'
 
-export type StoryProps = { loading?: boolean; story?: Item }
+export type StoryProps = {
+    loading?: boolean
+    story?: Item
+}
 
 const Story = forwardRef<HTMLDivElement, StoryProps>(
     ({ loading, story }, ref) => {

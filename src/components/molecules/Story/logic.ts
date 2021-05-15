@@ -1,37 +1,31 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import BookmarkContext from '../../../library/context/bookmark'
 import Item from '../../../library/types/Item'
-
-const LOCAL_STORAGE_KEY = 'hacker_news_bookmarks'
 
 export const useStoryLogic = (story?: Item) => {
     const [bookmarked, setBookmarked] = useState(false)
-
-    const fetchBookmarks = (): Item[] => {
-        const parsedBookmarks = JSON.parse(
-            window.localStorage.getItem(LOCAL_STORAGE_KEY) ?? '[]',
-        )
-        return Array.isArray(parsedBookmarks) ? parsedBookmarks : []
-    }
+    const { bookmarks, getBookmarks, setBookmarks } =
+        useContext(BookmarkContext)
 
     const toggleBookmark = () => {
-        const bookmarks = fetchBookmarks()
-        const bookmarked = bookmarks.some(({ id }) => story?.id === id)
-
-        window.localStorage.setItem(
-            LOCAL_STORAGE_KEY,
-            JSON.stringify(
+        if (story) {
+            const bookmarked = bookmarks?.some(({ id }) => story.id === id)
+            setBookmarks?.(
                 bookmarked
-                    ? bookmarks.filter(({ id }) => story?.id !== id)
-                    : [...bookmarks, story],
-            ),
-        )
-        setBookmarked(!bookmarked)
+                    ? bookmarks?.filter(({ id }) => story.id !== id) ?? []
+                    : [...(bookmarks ?? []), story],
+            )
+            setBookmarked(!bookmarked)
+        }
     }
 
+    // Set bookmark status on mount
     useEffect(() => {
-        const bookmarks = fetchBookmarks()
-        setBookmarked(bookmarks.some(({ id }) => story?.id === id))
-    }, [story])
+        if (!bookmarks) {
+            getBookmarks?.()
+        }
+        setBookmarked(bookmarks?.some(({ id }) => story?.id === id) ?? false)
+    }, [bookmarks, getBookmarks, story])
 
     return { bookmarked, toggleBookmark }
 }

@@ -3,12 +3,12 @@ import type Item from '../../../library/types/Item'
 import Story from '../../molecules/Story'
 import * as S from './styles'
 
-export type StoryListProps = {
+export type StoriesProps = {
     loading?: boolean
     stories: Item[]
 }
 
-const StoryList: React.FC<StoryListProps> = ({ loading, stories }) => {
+const Stories: React.FC<StoriesProps> = ({ loading, stories }) => {
     return (
         <S.Container>
             <FlipMove>
@@ -24,4 +24,4 @@ const StoryList: React.FC<StoryListProps> = ({ loading, stories }) => {
     )
 }
 
-export default StoryList
+export default Stories

@@ -1,10 +1,10 @@
 type Item = {
     by: string
-    descendants: number
+    descendants?: number
     id: number
     kids?: number[]
     rank?: number
-    score: number
+    score?: number
     text?: string
     time: number
     title?: string

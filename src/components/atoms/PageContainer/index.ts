@@ -5,6 +5,7 @@ const PageContainer = styled.div`
     margin: 0 auto;
     max-width: ${rem('980px')};
     padding: 0 ${rem('22px')};
+    width: 100%;
 `
 
 export default PageContainer

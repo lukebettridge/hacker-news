@@ -1,6 +1,7 @@
 export type ThemeColors = typeof light
 
 const light = {
+    backdrop: 'rgba(0, 0, 0, 0.4)',
     background: {
         primary: 'rgba(248, 250, 252, 1)',
         secondary: 'rgba(255, 255, 255, 1)',
@@ -21,6 +22,7 @@ const light = {
 }
 
 const dark: ThemeColors = {
+    backdrop: 'rgba(0, 0, 0, 0.7)',
     background: {
         primary: 'rgba(19, 19, 22, 1)',
         secondary: 'rgba(27, 27, 35, 1)',

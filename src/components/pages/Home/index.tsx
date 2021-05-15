@@ -1,4 +1,4 @@
-import StoryList from '../../organisms/StoryList'
+import Stories from '../../templates/Stories'
 import { useHomeLogic } from './logic'
 import * as S from './styles'
 
@@ -9,7 +9,7 @@ const Home: React.FC = () => {
     return (
         <S.Wrapper>
             <S.Container>
-                <StoryList loading={loadingMore} stories={stories} />
+                <Stories loading={loadingMore} stories={stories} />
                 {canLoadMore && !loadingMore && (
                     <S.Button disabled={loading} onClick={loadMore}>
                         Load more
