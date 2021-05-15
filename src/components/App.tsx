@@ -10,8 +10,8 @@ const App: React.FC = () => {
     return (
         <ThemeProvider theme={theme}>
             <SkeletonTheme
-                color={theme.colors.background.secondary}
-                highlightColor={theme.colors.background.primary}
+                color={theme.colors.skeleton.background}
+                highlightColor={theme.colors.skeleton.highlight}
             >
                 <GlobalStyle />
                 <Navigation />

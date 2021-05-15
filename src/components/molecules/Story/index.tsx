@@ -78,9 +78,9 @@ const Story = forwardRef<HTMLDivElement, StoryProps>(
 
         return (
             <S.Wrapper ref={ref}>
-                <S.Rank>
-                    <Skeleton />
-                </S.Rank>
+                <div style={{ alignItems: 'center', display: 'flex' }}>
+                    <Skeleton circle height={45} width={45} />
+                </div>
                 <S.Container>
                     <Heading level={6} style={{ margin: 0 }}>
                         <Skeleton style={{ width: '40%' }} />
