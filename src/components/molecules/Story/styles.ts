@@ -4,6 +4,7 @@ import { rem } from 'polished'
 export const Author = styled.p`
     font-size: 10pt;
     line-height: 1.5;
+    margin: ${rem('10px')} 0;
     text-align: right;
 
     a {
@@ -46,6 +47,7 @@ export const Container = styled.div`
 export const Hostname = styled.p`
     color: ${({ theme }) => theme.colors.text.secondary};
     font-size: 10pt;
+    line-height: 1.5;
     margin: ${rem('10px')} 0;
     max-width: ${rem('170px')};
     overflow: hidden;
@@ -53,7 +55,6 @@ export const Hostname = styled.p`
 `
 
 export const Meta = styled.div`
-    align-items: center;
     display: flex;
     justify-content: space-between;
 `

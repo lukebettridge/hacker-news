@@ -16,7 +16,8 @@ export type StoryProps = { loading?: boolean; story?: Item }
 
 const Story = forwardRef<HTMLDivElement, StoryProps>(
     ({ loading, story }, ref) => {
-        const { by, descendants, rank, score, time, title, url } = story ?? {}
+        const { by, descendants, id, rank, score, time, title, url } =
+            story ?? {}
         const { bookmarked, toggleBookmark } = useStoryLogic(story)
 
         if (!loading) {
@@ -51,10 +52,16 @@ const Story = forwardRef<HTMLDivElement, StoryProps>(
                         </S.Meta>
                         <S.Stats>
                             <div>
-                                <S.Score>
-                                    <HiOutlineThumbUp />
-                                    {score}
-                                </S.Score>
+                                <a
+                                    href={`https://news.ycombinator.com/vote?id=${id}&how=up&goto=news`}
+                                    rel="noreferrer"
+                                    target="_blank"
+                                >
+                                    <S.Score>
+                                        <HiOutlineThumbUp />
+                                        {score}
+                                    </S.Score>
+                                </a>
                                 <S.Comments>
                                     <HiOutlineChatAlt2 />
                                     {descendants}
@@ -85,7 +92,7 @@ const Story = forwardRef<HTMLDivElement, StoryProps>(
                     <Heading level={6} style={{ margin: 0 }}>
                         <Skeleton style={{ width: '40%' }} />
                     </Heading>
-                    <S.Meta>
+                    <S.Meta style={{ alignItems: 'center' }}>
                         <S.Hostname>
                             <Skeleton width={170} />
                         </S.Hostname>

@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
+import useDarkMode from 'use-dark-mode'
 import Dot from '../../atoms/Dot'
 import Heading from '../../atoms/Heading'
+import Tooltip from '../../atoms/Tooltip'
 import * as S from './styles'
 
 const Navigation: React.FC = () => {
     const [detached, setDetached] = useState(false)
+    const [tooltipVisible, setTooltipVisible] = useState(false)
+
+    const { toggle: toggleDarkMode } = useDarkMode()
+
     useEffect(() => {
         window.addEventListener('scroll', () => {
             setDetached(window.pageYOffset > 228)
@@ -14,7 +20,10 @@ const Navigation: React.FC = () => {
 
     return (
         <S.Wrapper>
-            <S.Container detached={detached}>
+            <S.Container
+                detached={detached}
+                onMouseLeave={() => setTooltipVisible(false)}
+            >
                 <div>
                     <S.Logo />
                     {!detached && (
@@ -40,7 +49,28 @@ const Navigation: React.FC = () => {
                     </Heading>
                 </div>
                 <S.Controls>
-                    <S.More />
+                    <S.TooltipContainer>
+                        <S.More
+                            onClick={() => setTooltipVisible(!tooltipVisible)}
+                        />
+                        <Tooltip show={tooltipVisible}>
+                            <span
+                                onClick={() => {
+                                    toggleDarkMode()
+                                    setTooltipVisible(false)
+                                }}
+                            >
+                                Toggle Appearance
+                            </span>
+                            <span
+                                onClick={() => {
+                                    setTooltipVisible(false)
+                                }}
+                            >
+                                Bookmarks
+                            </span>
+                        </Tooltip>
+                    </S.TooltipContainer>
                     {!detached && (
                         <S.Signpost>
                             Live <Dot />
