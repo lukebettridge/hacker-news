@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { HiX } from 'react-icons/hi'
 import * as S from './styles'
 
 export type ModalProps = {
@@ -23,7 +24,12 @@ const Modal: React.FC<ModalProps> = ({ children, hide, visible }) => {
 
     return (
         <S.Wrapper>
-            <S.Container>{children}</S.Container>
+            <S.Container>
+                <S.Close onClick={hide}>
+                    <HiX />
+                </S.Close>
+                {children}
+            </S.Container>
             <S.ClickTarget onClick={hide} />
         </S.Wrapper>
     )

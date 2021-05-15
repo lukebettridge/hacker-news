@@ -4,13 +4,22 @@ import HeadingAtom from '../../atoms/Heading'
 
 export const Container = styled.div``
 
+export const Empty = styled.p`
+    font-weight: 300;
+    line-height: 1.5;
+    margin: ${rem('40px')} 0;
+    opacity: 0.6;
+    padding: 0 ${rem('30px')};
+    text-align: center;
+`
+
 export const Heading = styled(HeadingAtom)`
     margin-bottom: ${rem('10px')};
     padding: 0 ${rem('30px')};
 `
 
 export const List = styled.div`
-    max-height: calc(90vh - ${rem('148px')});
+    max-height: calc(75vh - ${rem('148px')});
     overflow-y: auto;
     padding: ${rem('30px')} ${rem('30px')} ${rem('40px')};
 `

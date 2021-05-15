@@ -9,15 +9,21 @@ const Bookmarks: React.FC = () => {
     return (
         <S.Container>
             <S.Heading level={3}>Bookmarks</S.Heading>
-            <S.ListWrapper>
-                <S.List>
-                    <FlipMove>
-                        {bookmarks?.map((story) => (
-                            <Story key={story.id} story={story} />
-                        ))}
-                    </FlipMove>
-                </S.List>
-            </S.ListWrapper>
+            {bookmarks?.length ? (
+                <S.ListWrapper>
+                    <S.List>
+                        <FlipMove>
+                            {bookmarks?.map((story) => (
+                                <Story key={story.id} story={story} />
+                            ))}
+                        </FlipMove>
+                    </S.List>
+                </S.ListWrapper>
+            ) : (
+                <S.Empty>
+                    It looks like you haven&apos;t bookmarked anything yet.
+                </S.Empty>
+            )}
         </S.Container>
     )
 }
