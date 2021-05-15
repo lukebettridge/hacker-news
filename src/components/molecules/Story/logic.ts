@@ -13,7 +13,7 @@ export const useStoryLogic = (story?: Item) => {
             setBookmarks?.(
                 bookmarked
                     ? bookmarks?.filter(({ id }) => story.id !== id) ?? []
-                    : [...(bookmarks ?? []), story],
+                    : [story, ...(bookmarks ?? [])],
             )
             setBookmarked(!bookmarked)
         }
