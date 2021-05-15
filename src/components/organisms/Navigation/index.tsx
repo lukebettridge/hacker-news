@@ -1,33 +1,32 @@
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import useDarkMode from 'use-dark-mode'
+import { HiBookmarkAlt, HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
 import Bookmarks from '../../templates/Bookmarks'
 import Modal from '../../molecules/Modal'
 import Heading from '../../atoms/Heading'
-import Tooltip from '../../atoms/Tooltip'
 import Dot from '../../atoms/Dot'
 import * as S from './styles'
 
 const Navigation: React.FC = () => {
     const [detached, setDetached] = useState(false)
     const [modalVisible, setModalVisible] = useState(false)
-    const [tooltipVisible, setTooltipVisible] = useState(false)
 
-    const { toggle: toggleDarkMode } = useDarkMode()
+    const { toggle: toggleDarkMode, value: darkModeActive } = useDarkMode()
+
+    const handleScroll = () => {
+        setDetached(window.pageYOffset > 228)
+    }
 
     useEffect(() => {
-        window.addEventListener('scroll', () => {
-            setDetached(window.pageYOffset > 228)
-        })
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
     return (
         <>
             <S.Wrapper>
-                <S.Container
-                    detached={detached}
-                    onMouseLeave={() => setTooltipVisible(false)}
-                >
+                <S.Container detached={detached}>
                     <div>
                         <S.Logo />
                         {!detached && (
@@ -52,38 +51,33 @@ const Navigation: React.FC = () => {
                             Top Stories
                         </Heading>
                     </div>
-                    <S.Controls>
-                        <S.TooltipContainer>
-                            <S.More
+                    <S.End>
+                        <S.Controls>
+                            <span
                                 onClick={() => {
-                                    setTooltipVisible(!tooltipVisible)
+                                    toggleDarkMode()
                                 }}
-                            />
-                            <Tooltip show={tooltipVisible}>
-                                <span
-                                    onClick={() => {
-                                        toggleDarkMode()
-                                        setTooltipVisible(false)
-                                    }}
-                                >
-                                    Toggle Appearance
-                                </span>
-                                <span
-                                    onClick={() => {
-                                        setModalVisible(true)
-                                        setTooltipVisible(false)
-                                    }}
-                                >
-                                    Bookmarks
-                                </span>
-                            </Tooltip>
-                        </S.TooltipContainer>
+                            >
+                                {darkModeActive ? (
+                                    <HiOutlineSun />
+                                ) : (
+                                    <HiOutlineMoon />
+                                )}
+                            </span>
+                            <span
+                                onClick={() => {
+                                    setModalVisible(true)
+                                }}
+                            >
+                                <HiBookmarkAlt />
+                            </span>
+                        </S.Controls>
                         {!detached && (
                             <S.Signpost>
                                 Live <Dot />
                             </S.Signpost>
                         )}
-                    </S.Controls>
+                    </S.End>
                 </S.Container>
             </S.Wrapper>
             <Modal hide={() => setModalVisible(false)} visible={modalVisible}>

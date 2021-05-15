@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 import { linearGradient, rem, rgba } from 'polished'
 import { FaHackerNewsSquare } from 'react-icons/fa'
-import { HiDotsVertical } from 'react-icons/hi'
 import PageContainer from '../../atoms/PageContainer'
 
 export const Container = styled(PageContainer)<{ detached: boolean }>`
@@ -66,6 +65,19 @@ export const Container = styled(PageContainer)<{ detached: boolean }>`
 `
 
 export const Controls = styled.div`
+    color: ${({ theme }) => theme.colors.text.secondary};
+    display: flex;
+    font-size: 17pt;
+    grid-gap: ${rem('12px')};
+
+    span:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+`
+
+export const End = styled.div`
+    align-items: flex-end;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -74,17 +86,6 @@ export const Controls = styled.div`
 export const Logo = styled(FaHackerNewsSquare)`
     color: ${({ theme }) => theme.colors.primary};
     font-size: 26pt;
-`
-
-export const More = styled(HiDotsVertical)`
-    align-self: flex-end;
-    color: ${({ theme }) => theme.colors.text.secondary};
-    font-size: 16pt;
-
-    &:hover {
-        cursor: pointer;
-        opacity: 0.8;
-    }
 `
 
 export const Signpost = styled.p`
@@ -96,41 +97,6 @@ export const Signpost = styled.p`
     letter-spacing: ${rem('0.75px')};
     margin: 0 0 ${rem('6px')};
     text-transform: uppercase;
-`
-
-export const TooltipContainer = styled.div`
-    align-self: flex-end;
-    position: relative;
-
-    .rpt-container {
-        padding-right: 0 !important;
-
-        .rpt-arrow {
-            box-shadow: rgb(0 0 0 / 15%) 0px 0px 0px 1px;
-        }
-
-        .rpt-textbox-container {
-            padding-right: 0 !important;
-            right: -10px !important;
-
-            .rpt-shadow-container {
-                box-shadow: 0 0 ${rem('30px')} ${rem('-20px')}
-                        ${({ theme }) => theme.colors.shadow},
-                    rgb(0 0 0 / 10%) 0px 0px 3px,
-                    rgb(0 0 0 / 10%) 0px 0px 0px 1px;
-                width: 100% !important;
-            }
-
-            .rpt-hover {
-                > * {
-                    &:hover {
-                        color: ${({ theme }) =>
-                            theme.colors.text.secondary} !important;
-                    }
-                }
-            }
-        }
-    }
 `
 
 export const Wrapper = styled.div`
