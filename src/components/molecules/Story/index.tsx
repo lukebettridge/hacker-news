@@ -65,10 +65,16 @@ const Story = forwardRef<HTMLDivElement, StoryProps>(
                                         {score}
                                     </S.Score>
                                 </a>
-                                <S.Comments>
-                                    <HiOutlineChatAlt2 />
-                                    {descendants}
-                                </S.Comments>
+                                <a
+                                    href={`https://news.ycombinator.com/item?id=${id}`}
+                                    rel="noreferrer"
+                                    target="_blank"
+                                >
+                                    <S.Comments>
+                                        <HiOutlineChatAlt2 />
+                                        {descendants}
+                                    </S.Comments>
+                                </a>
                             </div>
                             <S.Bookmark
                                 bookmarked={bookmarked}
