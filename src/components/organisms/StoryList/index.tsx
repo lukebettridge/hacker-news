@@ -4,16 +4,21 @@ import Story from '../../molecules/Story'
 import * as S from './styles'
 
 export type StoryListProps = {
+    loading?: boolean
     stories: Item[]
 }
 
-const StoryList: React.FC<StoryListProps> = ({ stories }) => {
+const StoryList: React.FC<StoryListProps> = ({ loading, stories }) => {
     return (
         <S.Container>
             <FlipMove>
                 {stories.map((story) => (
-                    <Story {...story} key={story.id} />
+                    <Story key={story.id} story={story} />
                 ))}
+                {loading &&
+                    Array.from({ length: 5 }).map((_, i) => (
+                        <Story key={`skeleton-${i}`} loading />
+                    ))}
             </FlipMove>
         </S.Container>
     )

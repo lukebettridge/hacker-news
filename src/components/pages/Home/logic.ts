@@ -5,6 +5,7 @@ const PAGE_SIZE = 20
 
 export const useHomeLogic = () => {
     const [loading, setLoading] = useState(false)
+    const [loadingMore, setLoadingMore] = useState(false)
     const [page, setPage] = useState<number>(1)
     const [stories, setStories] = useState<Item[]>([])
     const [storyIds, setStoryIds] = useState<number[]>([])
@@ -12,6 +13,7 @@ export const useHomeLogic = () => {
     // Fetch initial story IDs
     useEffect(() => {
         setLoading(true)
+        setLoadingMore(true)
         const fetchStoryIds = async () => {
             fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
                 .then((res) => res.json())
@@ -52,6 +54,7 @@ export const useHomeLogic = () => {
                         })),
                     )
                     setLoading(false)
+                    setLoadingMore(false)
                 })
             }
         }
@@ -60,11 +63,13 @@ export const useHomeLogic = () => {
 
     const loadMore = () => {
         setPage(page + 1)
+        setLoadingMore(true)
     }
 
     return {
         canLoadMore: stories.length > 0 && storyIds.length > stories.length,
         loading,
+        loadingMore,
         loadMore,
         page,
         stories,

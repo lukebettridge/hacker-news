@@ -53,6 +53,7 @@ export const Hostname = styled.p`
 `
 
 export const Meta = styled.div`
+    align-items: center;
     display: flex;
     justify-content: space-between;
 `

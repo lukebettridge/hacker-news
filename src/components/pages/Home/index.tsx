@@ -3,13 +3,14 @@ import { useHomeLogic } from './logic'
 import * as S from './styles'
 
 const Home: React.FC = () => {
-    const { canLoadMore, loading, loadMore, stories } = useHomeLogic()
+    const { canLoadMore, loading, loadingMore, loadMore, stories } =
+        useHomeLogic()
 
     return (
         <S.Wrapper>
             <S.Container>
-                <StoryList stories={stories} />
-                {canLoadMore && (
+                <StoryList loading={loadingMore} stories={stories} />
+                {canLoadMore && !loadingMore && (
                     <S.Button disabled={loading} onClick={loadMore}>
                         Load more
                     </S.Button>

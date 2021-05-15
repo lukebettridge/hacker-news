@@ -3,7 +3,7 @@ import Item from '../../../library/types/Item'
 
 const LOCAL_STORAGE_KEY = 'hacker_news_bookmarks'
 
-export const useStoryLogic = (story: Item) => {
+export const useStoryLogic = (story?: Item) => {
     const [bookmarked, setBookmarked] = useState(false)
 
     const fetchBookmarks = (): Item[] => {
@@ -15,13 +15,13 @@ export const useStoryLogic = (story: Item) => {
 
     const toggleBookmark = () => {
         const bookmarks = fetchBookmarks()
-        const bookmarked = bookmarks.some(({ id }) => story.id === id)
+        const bookmarked = bookmarks.some(({ id }) => story?.id === id)
 
         window.localStorage.setItem(
             LOCAL_STORAGE_KEY,
             JSON.stringify(
                 bookmarked
-                    ? bookmarks.filter(({ id }) => story.id !== id)
+                    ? bookmarks.filter(({ id }) => story?.id !== id)
                     : [...bookmarks, story],
             ),
         )
@@ -30,7 +30,7 @@ export const useStoryLogic = (story: Item) => {
 
     useEffect(() => {
         const bookmarks = fetchBookmarks()
-        setBookmarked(bookmarks.some(({ id }) => story.id === id))
+        setBookmarked(bookmarks.some(({ id }) => story?.id === id))
     }, [story])
 
     return { bookmarked, toggleBookmark }
