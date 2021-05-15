@@ -15,6 +15,20 @@ export const Author = styled.p`
     }
 `
 
+export const Bookmark = styled.div<{ bookmarked: boolean }>`
+    color: ${({ bookmarked, theme }) =>
+        bookmarked ? theme.colors.bookmark : theme.colors.text.primary};
+    transition: color 250ms, transform 100ms;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:active {
+        transform: scale(0.9);
+    }
+`
+
 export const Comments = styled.div`
     align-items: center;
     color: ${({ theme }) => theme.colors.secondary};
@@ -74,7 +88,7 @@ export const Stats = styled.div`
     justify-content: space-between;
 
     svg {
-        font-size: 12pt;
+        font-size: 13pt;
     }
 `
 

@@ -13,11 +13,9 @@ export const useHomeLogic = () => {
     useEffect(() => {
         setLoading(true)
         const fetchStoryIds = async () => {
-            const res = await fetch(
-                'https://hacker-news.firebaseio.com/v0/topstories.json',
-            )
-            const storyIds = await res.json()
-            setStoryIds(storyIds)
+            fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
+                .then((res) => res.json())
+                .then((storyIds) => setStoryIds(storyIds))
         }
 
         const intervalId = setInterval(() => {
@@ -37,20 +35,24 @@ export const useHomeLogic = () => {
             if (storyIds.length > 0) {
                 setLoading(true)
 
-                const stories = []
                 const offset = (page - 1) * PAGE_SIZE
-                for (const i in storyIds.slice(0, offset + PAGE_SIZE)) {
-                    const res = await fetch(
-                        `https://hacker-news.firebaseio.com/v0/item/${storyIds[i]}.json`,
+                Promise.all(
+                    storyIds
+                        .slice(0, offset + PAGE_SIZE)
+                        .map((id) =>
+                            fetch(
+                                `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
+                            ).then((res) => res.json()),
+                        ),
+                ).then((stories) => {
+                    setStories(
+                        stories.map((story) => ({
+                            ...story,
+                            rank: storyIds.indexOf(story.id) + 1,
+                        })),
                     )
-                    const story = await res.json()
-                    stories.push({
-                        ...story,
-                        rank: storyIds.indexOf(storyIds[i]) + 1,
-                    })
-                }
-                setStories(stories)
-                setLoading(false)
+                    setLoading(false)
+                })
             }
         }
         fetchStories()

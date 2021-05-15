@@ -1,18 +1,23 @@
 import { forwardRef } from 'react'
 import dayjs from 'dayjs'
 import {
+    HiBookmark,
     HiOutlineChatAlt2,
     HiOutlineBookmark,
     HiOutlineThumbUp,
 } from 'react-icons/hi'
 import Heading from '../../atoms/Heading'
 import Item from '../../../library/types/Item'
+import { useStoryLogic } from './logic'
 import * as S from './styles'
 
 export type StoryProps = Item & {}
 
-const Story = forwardRef<HTMLDivElement, StoryProps>(
-    ({ by, descendants, rank, score, time, title, url }, ref) => (
+const Story = forwardRef<HTMLDivElement, StoryProps>((story, ref) => {
+    const { by, descendants, rank, score, time, title, url } = story
+    const { bookmarked, toggleBookmark } = useStoryLogic(story)
+
+    return (
         <S.Wrapper ref={ref}>
             {!!rank && <S.Rank>{rank}</S.Rank>}
             <S.Container>
@@ -52,11 +57,16 @@ const Story = forwardRef<HTMLDivElement, StoryProps>(
                             {descendants}
                         </S.Comments>
                     </div>
-                    <HiOutlineBookmark />
+                    <S.Bookmark
+                        bookmarked={bookmarked}
+                        onClick={toggleBookmark}
+                    >
+                        {bookmarked ? <HiBookmark /> : <HiOutlineBookmark />}
+                    </S.Bookmark>
                 </S.Stats>
             </S.Container>
         </S.Wrapper>
-    ),
-)
+    )
+})
 
 export default Story

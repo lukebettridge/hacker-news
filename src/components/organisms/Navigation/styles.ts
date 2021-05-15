@@ -15,9 +15,10 @@ export const Container = styled(PageContainer)<{ detached: boolean }>`
     ${({ detached }) =>
         detached &&
         css`
-        align-items: center;
+            align-items: center;
+            backdrop-filter: blur(${rem('10px')});
             background-color: ${({ theme }) =>
-                theme.colors.background.secondary};
+                rgba(theme.colors.background.secondary, 0.97)};
             border: ${rem('1px')} solid ${({ theme }) => theme.colors.border};
             border-radius: ${rem('12px')};
             box-shadow: 0 0 ${rem('30px')} ${rem('-20px')}
