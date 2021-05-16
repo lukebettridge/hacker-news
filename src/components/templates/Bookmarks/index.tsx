@@ -15,7 +15,11 @@ const Bookmarks: React.FC = () => {
                     <S.List>
                         <FlipMove>
                             {bookmarks?.map((story) => (
-                                <Story key={story.id} story={story} />
+                                <Story
+                                    data-testid="story"
+                                    key={story.id}
+                                    story={story}
+                                />
                             ))}
                         </FlipMove>
                     </S.List>
