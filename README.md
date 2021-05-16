@@ -38,3 +38,21 @@ yarn run start
 ```
 
 Which can now be viewed in the browser at `http://localhost:3000/`.
+
+## Testing
+
+Where I had time, unit tests were written for the majority of components.
+
+### Unit tests
+
+The testing framework Jest is used for unit testing, alongside React Testing Library. To run these, execute the following:
+
+```
+yarn run test
+```
+
+`react-scripts test` expects unit tests to be located within a `__tests__` directory. For convenience, I have instead kept unit tests alongside the component, so this command will not work. I have changed the `package.json` script to run `jest` directly.
+
+## Additional Functionality
+
+As additional functionality, I chose to facilitate bookmarking individual stories, a dark-mode theme, and live updates (where a request is made to the Hacker News API every 30 seconds and updates the UI accordingly).
