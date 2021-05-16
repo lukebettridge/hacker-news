@@ -1,3 +1,4 @@
+import React from 'react'
 import FlipMove from 'react-flip-move'
 import Story from '../../molecules/Story'
 import { useBookmarksLogic } from './logic'

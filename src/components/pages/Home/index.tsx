@@ -1,3 +1,4 @@
+import React from 'react'
 import Stories from '../../templates/Stories'
 import { useHomeLogic } from './logic'
 import * as S from './styles'

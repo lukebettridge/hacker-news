@@ -12,12 +12,18 @@ export const useHomeLogic = () => {
 
     // Fetch initial story IDs
     useEffect(() => {
+        let isMounted = true
+
         setLoading(true)
         setLoadingMore(true)
         const fetchStoryIds = async () => {
             fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
                 .then((res) => res.json())
-                .then((storyIds) => setStoryIds(storyIds))
+                .then((storyIds) => {
+                    if (isMounted) {
+                        setStoryIds(storyIds)
+                    }
+                })
         }
 
         const intervalId = setInterval(() => {
@@ -28,12 +34,17 @@ export const useHomeLogic = () => {
 
         fetchStoryIds()
 
-        return () => clearInterval(intervalId)
+        return () => {
+            clearInterval(intervalId)
+            isMounted = false
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     // Fetch each story for the set page
     useEffect(() => {
+        let isMounted = true
+
         const fetchStories = async () => {
             if (storyIds.length > 0) {
                 setLoading(true)
@@ -48,18 +59,24 @@ export const useHomeLogic = () => {
                             ).then((res) => res.json()),
                         ),
                 ).then((stories) => {
-                    setStories(
-                        stories.map((story) => ({
-                            ...story,
-                            rank: storyIds.indexOf(story.id) + 1,
-                        })),
-                    )
-                    setLoading(false)
-                    setLoadingMore(false)
+                    if (isMounted) {
+                        setStories(
+                            stories.map((story) => ({
+                                ...story,
+                                rank: storyIds.indexOf(story.id) + 1,
+                            })),
+                        )
+                        setLoading(false)
+                        setLoadingMore(false)
+                    }
                 })
             }
         }
         fetchStories()
+
+        return () => {
+            isMounted = false
+        }
     }, [page, storyIds])
 
     const loadMore = () => {

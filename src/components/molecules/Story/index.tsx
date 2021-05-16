@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import dayjs from 'dayjs'
 import {
     HiBookmark,

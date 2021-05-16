@@ -1,3 +1,4 @@
+import React from 'react'
 import FlipMove from 'react-flip-move'
 import type Item from '../../../library/types/Item'
 import Story from '../../molecules/Story'

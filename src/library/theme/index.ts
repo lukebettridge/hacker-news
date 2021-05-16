@@ -2,11 +2,12 @@ import * as styledComponents from 'styled-components'
 import useDarkMode from 'use-dark-mode'
 import { dark, light, ThemeColors } from './colors'
 
-const theme = {
+export const theme = {
     fonts: {
         primary:
             '-apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif',
     },
+    colors: light,
 }
 type Theme = typeof theme & { colors: ThemeColors }
 

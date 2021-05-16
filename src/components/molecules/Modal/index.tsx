@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { HiX } from 'react-icons/hi'
 import * as S from './styles'
 
