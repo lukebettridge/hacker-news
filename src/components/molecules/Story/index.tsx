@@ -18,14 +18,14 @@ export type StoryProps = {
 }
 
 const Story = forwardRef<HTMLDivElement, StoryProps>(
-    ({ loading, story }, ref) => {
+    ({ loading, story, ...rest }, ref) => {
         const { by, descendants, id, rank, score, time, title, url } =
             story ?? {}
         const { bookmarked, toggleBookmark } = useStoryLogic(story)
 
         if (!loading) {
             return (
-                <S.Wrapper ref={ref}>
+                <S.Wrapper {...rest} ref={ref}>
                     {!!rank && <S.Rank>{rank}</S.Rank>}
                     <S.Container>
                         <a href={url} rel="noreferrer" target="_blank">
@@ -93,7 +93,7 @@ const Story = forwardRef<HTMLDivElement, StoryProps>(
         }
 
         return (
-            <S.Wrapper ref={ref}>
+            <S.Wrapper {...rest} ref={ref}>
                 <div style={{ alignItems: 'center', display: 'flex' }}>
                     <Skeleton circle height={45} width={45} />
                 </div>

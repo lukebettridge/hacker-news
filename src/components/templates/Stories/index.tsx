@@ -14,11 +14,15 @@ const Stories: React.FC<StoriesProps> = ({ loading, stories }) => {
         <S.Container>
             <FlipMove>
                 {stories.map((story) => (
-                    <Story key={story.id} story={story} />
+                    <Story data-testid="story" key={story.id} story={story} />
                 ))}
                 {loading &&
                     Array.from({ length: 5 }).map((_, i) => (
-                        <Story key={`skeleton-${i}`} loading />
+                        <Story
+                            data-testid="skeleton"
+                            key={`skeleton-${i}`}
+                            loading
+                        />
                     ))}
             </FlipMove>
         </S.Container>
