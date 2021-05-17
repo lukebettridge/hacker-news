@@ -4,6 +4,8 @@ A redesigned Hacker News front page, listing top stories from the Hacker News AP
 
 A React single-page application bootstrapped using `create-react-app`, styled using `styled-components`.
 
+<img src="https://user-images.githubusercontent.com/21157948/118530068-20bb5200-b73c-11eb-9680-3bca996ea53b.png" />
+
 ## Getting Started
 
 Follow the steps below to get this project running locally.
